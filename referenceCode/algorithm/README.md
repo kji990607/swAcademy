@@ -85,3 +85,40 @@ int main() {
 * 공간복잡도: `O(1)`
 
 [참고 링크](https://devuna.tistory.com/28)
+
+#삽입정렬 Insertion Sort
+&nbsp;&nbsp;&nbsp;&nbsp;![](https://media.vlpt.us/images/hwamoc/post/4baaa2bc-d48a-4f3b-a063-6538f6f59971/%EC%82%BD%EC%9E%851.gif)
+
+&nbsp;&nbsp;&nbsp;&nbsp;2번째 원소부터 시작하여 그 앞(왼쪽)의 이미 정렬된 원소들과 비교하여 삽입할 위치를 지정한 후, 원소를 뒤로 옮기고 지정된 자리에 자료를 삽입 하여 정렬한다.
+* 안정 정렬(stable)
+* 제자리 정렬(In-place)
+* Selection Sort와 유사하지만 더 효율적이다.&nbsp;&nbsp;&nbsp;&nbsp;![](https://images.velog.io/images/kji990607/post/daf5e412-c37c-462b-8529-a0251db0589d/image.png)
+>1. 두번째 위치(index)의 값을 key에 저장한다.
+>2. key와 이전에 있는 원소들과 비교하며 삽입해나간다.
+>3. 1번으로 돌아가 다음 위치(index)의 값을 key에 저장하고, 반복한다.
+* 코드
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+    int data[] = {8, 5, 6, 2, 4};
+    int i, j, key;
+    for(i=1; i<5; i++){
+        key = data[i];
+        for(j=i-1; j>=0 && data[j]>key; j--){
+            data[j+1] = data[j];
+        }
+        data[j+1] = key;
+    }
+    return 0;
+}
+```
+* 시간복잡도
+
+ |시간복잡도
+---|---
+최선|O(n)
+평균, 최악|O(n^2)
+&nbsp;&nbsp;&nbsp;&nbsp;자료가 이미 정렬이 되어있는 상태인 경우 한 번씩 비교만 하면 된다. 최악의 경우(역으로 정렬된 경우) `<br/>(n-1) + (n-2) + (n-3) + .... + 2 + 1 = n(n-1)/2` 즉, O(n^2)이다.
+* 공간복잡도: `O(1)`
